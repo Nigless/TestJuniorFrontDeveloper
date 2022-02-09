@@ -1,7 +1,7 @@
 
-[![Lint](https://github.com/nichegosebe/test/workflows/lint/badge.svg)](https://github.com/nichegosebe/test/actions)
+[![Lint](https://github.com/CarTechRu/TestJuniorFrontDeveloper/workflows/lint/badge.svg)](https://github.com/CarTechRu/TestJuniorFrontDeveloper/actions)
 
-# Carprice test app
+# Test Junior Front Developer
 
 ## Установка
 
