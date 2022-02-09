@@ -1,6 +1,8 @@
 
 [![Lint](https://github.com/CarTechRu/TestJuniorFrontDeveloper/workflows/lint/badge.svg)](https://github.com/CarTechRu/TestJuniorFrontDeveloper/actions)
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/60be8bcaaa72c7608261/maintainability)](https://codeclimate.com/github/CarTechRu/TestJuniorFrontDeveloper/maintainability)
+
 # Test Junior Front Developer
 
 ## Установка
