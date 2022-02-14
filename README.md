@@ -39,4 +39,16 @@ GET: `/api/auction/:auctionId` возвращает информацию об о
 
 ## UI kit
 
-В проекте подключен и преднастроен [material-ui](https://mui.com/), будет большим плюсом, если он будет использован. 
+В проекте подключен и преднастроен [material-ui](https://mui.com/), будет большим плюсом, если он будет использован
+
+## Примеры верстки
+
+Список аукционов
+
+![auctions_sample](https://user-images.githubusercontent.com/68642210/153865143-adf5a83a-dc48-4350-afd9-58f6f31fa074.jpg)
+
+ Страница отдельного аукциона:
+
+![details_sample](https://user-images.githubusercontent.com/68642210/153865147-692885a0-e215-4fc8-80bc-b85491925280.jpg)
+
+Изображения с примерами верстки находятся в папке samples
