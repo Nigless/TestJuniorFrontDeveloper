@@ -27,13 +27,13 @@ const Heading = styled.h2`
 const Input = styled.input`
   display: block;
   width: 100%;
-  border: solid 2px #eee;
+  border: solid 3px #eee;
   margin-bottom: 20px;
   font-size: inherit;
   font-family: inherit;
   padding: 10px;
   border-radius: 4px;
-  transition: 0.2s;
+  transition: background 0.2s;
 
   &:placeholder-shown {
     background: #eee;
