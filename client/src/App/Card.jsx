@@ -10,7 +10,7 @@ const Root = styled.div`
 `;
 const Header = styled.div`
     display: flex;
-    padding: 8px;
+    padding: 10px;
 `;
 const Title = styled.div`
     width: 100%;
@@ -29,9 +29,10 @@ const Label = styled.div`
     background: #8c8b8c;
     color:white;
     position: absolute;
-    right: 0;
-    bottom: 0;
+    right: 5px;
+    bottom: 5px;
     padding: 5px;
+    line-height: 1
 `;
 
 function Card({
