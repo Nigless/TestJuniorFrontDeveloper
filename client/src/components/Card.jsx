@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import Ratio from './Ratio';
 
 const Root = styled.div`
     background: #eee;
@@ -7,10 +8,21 @@ const Root = styled.div`
     overflow: hidden;
     font-weight: bold;
     position: relative;
+    animation-name: card;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+
+    @keyframes card {
+      0% {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+    }
 `;
 const Header = styled.div`
     display: flex;
     padding: 10px;
+    white-space: nowrap;
 `;
 const Title = styled.div`
     width: 100%;
@@ -22,21 +34,27 @@ const SubTitle = styled.div`
     color: #8c8b8c;
 `;
 const Image = styled.img`
-    display:block;
-    max-width:100%;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    position: absolute;
 `;
 const Label = styled.div`
     background: #8c8b8c;
-    color:white;
+    color: white;
     position: absolute;
-    right: 5px;
-    bottom: 5px;
+    right: 8px;
+    bottom: 8px;
     padding: 5px;
+    border-radius: 4px;
     line-height: 1
 `;
 
 function Card({
-  className = '', title = '', subTitle = '', image = '', label = '',
+  className, title, subTitle, image, label,
 }) {
   return (
     <Root className={className}>
@@ -48,9 +66,11 @@ function Card({
           {subTitle}
         </SubTitle>
       </Header>
-      <Image src={image} />
+      <Ratio size={1 / 1.5}>
+        <Image src={image} />
+      </Ratio>
       {label
-                && <Label>{label}</Label>}
+        && <Label>{label}</Label>}
     </Root>
   );
 }
