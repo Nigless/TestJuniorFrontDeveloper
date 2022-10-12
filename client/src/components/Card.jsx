@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Ratio from './Ratio';
 
-const Root = styled.div`
+const Root = styled(Link)`
     background: #eee;
     border-radius: 4px;
     overflow: hidden;
@@ -11,6 +12,8 @@ const Root = styled.div`
     animation-name: card;
     animation-duration: 0.5s;
     animation-timing-function: ease-out;
+    color: inherit;
+    text-decoration: none;
 
     @keyframes card {
       0% {
@@ -54,10 +57,10 @@ const Label = styled.div`
 `;
 
 function Card({
-  className, title, subTitle, image, label,
+  href, className, title, subTitle, image, label,
 }) {
   return (
-    <Root className={className}>
+    <Root to={href} className={className}>
       <Header>
         <Title>
           {title}
@@ -76,6 +79,7 @@ function Card({
 }
 
 Card.propTypes = {
+  href: PropTypes.string.isRequired,
   className: PropTypes.string,
   title: PropTypes.string.isRequired,
   subTitle: PropTypes.string,

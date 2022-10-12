@@ -1,8 +1,10 @@
 import produce from 'immer';
 import {
   updateAuctions,
-  updateSearch,
+  UPDATE_AUCTIONS,
+  UPDATE_SEARCH,
 } from './actions';
+import polling from '../utils/polling';
 
 export default (state = {
   isLoading: true,
@@ -12,12 +14,12 @@ export default (state = {
   payload,
 } = {}) => {
   switch (type) {
-    case updateAuctions:
+    case UPDATE_AUCTIONS:
       return produce(state, (draft) => {
         draft.isLoading = false;
         draft.list = payload;
       });
-    case updateSearch:
+    case UPDATE_SEARCH:
       if (state.isLoading) return state;
       return produce(state, (draft) => {
         draft.isLoading = true;
@@ -27,19 +29,8 @@ export default (state = {
   }
 };
 
-export const startAuctionsPolling = (dispatch, query = {}) => {
-  const url = new URL(`${process.env.CONFIG.API_BASEPATH}/filterAuctions`);
-  url.search = new URLSearchParams(query);
-  let timer = null;
-  const refetch = async () => {
-    timer = setTimeout(refetch, process.env.CONFIG.POLLING_INTERVAL * 1000);
-    const response = await (await fetch(url.toString())).json();
-    dispatch(updateAuctions(response.auctions));
-  };
-  refetch();
-
-  return () => {
-    clearTimeout(timer);
-    dispatch = () => {};
-  };
-};
+export const startAuctionsPolling = (dispatch, query = {}) => polling(
+  '/filterAuctions',
+  ((response) => dispatch(updateAuctions(response.auctions))),
+  query,
+);
