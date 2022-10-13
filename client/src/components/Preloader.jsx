@@ -5,6 +5,7 @@ const Root = styled.div`
     display: flex;
     overflow: hidden;
     padding: 4px 0;
+
     &>*+*{
         margin-left: 12px;
     }

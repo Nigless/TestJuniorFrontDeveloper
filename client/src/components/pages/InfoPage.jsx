@@ -28,7 +28,10 @@ function InfoPage() {
       `/auction/${id}`,
       ((response) => dispatch(updateData(response.auction))),
     );
-    return unsubscribe;
+    return () => {
+      unsubscribe();
+      dispatch(updatePage());
+    };
   }, [id]);
   return <Info />;
 }

@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import Ratio from './Ratio';
 
 const Root = styled(Link)`
-    background: #eee;
+    box-shadow: 0 0 20px -15px #000;
+    background: #fff;
     border-radius: 4px;
     overflow: hidden;
     font-weight: bold;
@@ -32,6 +33,7 @@ const Title = styled.div`
     margin-right: 5px;
     overflow: hidden;
     text-overflow: ellipsis;
+    ${({ disabled }) => (disabled ? 'color: #444' : '')}
 `;
 const SubTitle = styled.div`
     color: #8c8b8c;
@@ -44,25 +46,26 @@ const Image = styled.img`
     left: 0;
     object-fit: cover;
     position: absolute;
+    ${({ disabled }) => (disabled ? 'filter: grayscale(1);' : '')}
 `;
 const Label = styled.div`
-    background: #8c8b8c;
-    color: white;
+    background: #50d7ff;
     position: absolute;
     right: 8px;
     bottom: 8px;
     padding: 5px;
     border-radius: 4px;
-    line-height: 1
+    line-height: 1;
+    ${({ disabled }) => (disabled ? 'background: #fff;' : '')}   
 `;
 
 function Card({
-  href, className, title, subTitle, image, label,
+  href, className, title, subTitle, image, label, disabled,
 }) {
   return (
     <Root to={href} className={className}>
       <Header>
-        <Title>
+        <Title disabled={disabled}>
           {title}
         </Title>
         <SubTitle>
@@ -70,16 +73,17 @@ function Card({
         </SubTitle>
       </Header>
       <Ratio size={1 / 1.5}>
-        <Image src={image} />
+        <Image src={image} disabled={disabled} />
       </Ratio>
       {label
-        && <Label>{label}</Label>}
+        && <Label disabled={disabled}>{label}</Label>}
     </Root>
   );
 }
 
 Card.propTypes = {
   href: PropTypes.string.isRequired,
+  disabled: PropTypes.bool,
   className: PropTypes.string,
   title: PropTypes.string.isRequired,
   subTitle: PropTypes.string,
@@ -88,6 +92,7 @@ Card.propTypes = {
 };
 
 Card.defaultProps = {
+  disabled: false,
   className: '',
   subTitle: '',
   label: '',
