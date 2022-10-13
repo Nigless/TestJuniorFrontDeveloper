@@ -1,10 +1,16 @@
-export const UPDATE_AUCTIONS = 'UPDATE_AUCTIONS';
-export const updateAuctions = (payload = []) => ({
-  type: UPDATE_AUCTIONS,
+export const AUCTIONS_UPDATED = 'AUCTIONS_UPDATED';
+export const auctionsUpdated = (payload = []) => ({
+  type: AUCTIONS_UPDATED,
   payload,
 });
 
-export const UPDATE_SEARCH = 'UPDATE_SEARCH';
-export const updateSearch = () => ({
-  type: UPDATE_SEARCH,
+export const SEARCH_UPDATED = 'SEARCH_UPDATED';
+export const searchUpdated = (payload) => ({
+  type: SEARCH_UPDATED,
+  payload,
+});
+
+export const SECONDS_UPDATED = 'SECONDS_UPDATED';
+export const secondsUpdated = () => ({
+  type: SECONDS_UPDATED,
 });

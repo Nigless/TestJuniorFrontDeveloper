@@ -7,7 +7,7 @@ const Heading = styled.h2`
   text-align: center;
   font-weight: lighter;
   font-size: 3em;
-  color: #666
+  color: #555
 `;
 
 function App() {

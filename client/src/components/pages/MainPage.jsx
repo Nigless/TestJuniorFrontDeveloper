@@ -1,31 +1,43 @@
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import debounce from 'lodash/debounce';
-import { startAuctionsPolling } from '../../store/auctions/reducer';
-import { updateSearch } from '../../store/auctions/actions';
+import { useEffect } from 'react';
+import { searchUpdated } from '../../store/auctions/actions';
 import Main from '../Main';
+import { startPolling, startTick } from '../../store/auctions/reducer';
 
-export default connect(
-  (state) => ({ list: state.auctions.list, loading: state.auctions.isLoading }),
-  (dispatch) => {
-    let stopAuctionsPolling = startAuctionsPolling(dispatch);
-    const onSearchChange = debounce((value) => {
-      if (value === '') {
-        stopAuctionsPolling();
-        stopAuctionsPolling = startAuctionsPolling(dispatch);
-        return;
-      }
+function MainPage({ list, loading, search }) {
+  const dispatch = useDispatch();
 
-      stopAuctionsPolling();
-      stopAuctionsPolling = startAuctionsPolling(dispatch, { search: value });
-    }, 300);
-    return {
-      onSearchChange(value) {
-        dispatch(updateSearch(value));
-        onSearchChange(value);
-      },
-      onUnmount() {
-        stopAuctionsPolling();
-      },
-    };
-  },
-)(Main);
+  useEffect(() => {
+    const stopTick = startTick(dispatch);
+    return stopTick;
+  }, []);
+
+  useEffect(() => {
+    const stopPolling = startPolling(dispatch, search);
+    return stopPolling;
+  }, [search]);
+
+  const onSearchChange = debounce((value) => dispatch(searchUpdated(value)), 300);
+
+  return <Main list={list} loading={loading} onSearchChange={onSearchChange} />;
+}
+
+MainPage.propTypes = {
+  list: PropTypes.arrayOf({}),
+  loading: PropTypes.bool,
+  search: PropTypes.string,
+};
+
+MainPage.defaultProps = {
+  list: [],
+  loading: false,
+  search: '',
+};
+
+export default connect((state) => ({
+  list: state.auctions.list,
+  loading: state.auctions.isLoading,
+  search: state.auctions.search,
+}))(MainPage);

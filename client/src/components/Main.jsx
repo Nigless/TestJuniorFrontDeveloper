@@ -32,13 +32,18 @@ const List = styled.div`
   &>*{
     margin-top: 20px;
     margin-left: 20px;
-    width: calc(${100 / 3}% - 20px)
-  }
+    width: calc(${100 / 2}% - 20px)
+    
+}
+@media (min-width: 576px) {&>*{
+    width: calc(${100 / 3}% - 20px)}
+}
 `;
 const Input = styled.input`
+  box-shadow: 0 0 20px -15px #000;
   display: block;
   width: 100%;
-  border: solid 3px #eee;
+  border: solid 3px #fff;
   margin-bottom: 20px;
   font-size: inherit;
   font-family: inherit;
@@ -51,11 +56,7 @@ const Input = styled.input`
   }
 
   &:placeholder-shown {
-    background: #eee;
-  }
-
-  &:focus {
-    background: none;
+    background: #fff;
   }
 `;
 
@@ -84,10 +85,8 @@ function Main({
         : (
           <List>
             {list.map(({
-              bid, finishTime, id, imgUrl, title,
+              bid, time, id, imgUrl, title,
             }) => {
-              const date = new Date(finishTime - (Date.now() - 10800000));
-
               let label;
               if (bid) label = `Ставка: ${bid.toString()} р`;
 
@@ -96,9 +95,11 @@ function Main({
                   href={`/auction/${id}`}
                   key={id}
                   title={title}
-                  subTitle={`${parseInt(date / (1000 * 60 * 60), 10)}:${date.getMinutes() > 9 ? date.getMinutes() : `0${date.getMinutes()}`}`}
+                  subTitle={time === 0 ? 'ЗАВЕРШЕНО' : new Date(time)
+                    .toLocaleTimeString('en-US', { minute: '2-digit', second: '2-digit' })}
                   image={process.env.CONFIG.IMAGES_BASEPATH + imgUrl}
                   label={label}
+                  disabled={time === 0}
                 />
               );
             })}
