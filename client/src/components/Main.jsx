@@ -9,7 +9,7 @@ import Container from './Container';
 const Face = styled.div`
   font-size: 3.2em;
   font-weight: bold;
-  color: #999;
+  color: #777;
   margin-bottom: 30px;
 `;
 const Placeholder = styled.div`
@@ -18,7 +18,7 @@ const Placeholder = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #666;
+  color: #444;
   text-align: center;
   flex-direction: column;
 `;
